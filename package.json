@@ -1,0 +1,44 @@
+{
+  "name": "guitar-party",
+  "version": "1.0.0",
+  "description": "It's about node.js, angular, mongodb, sockets, blah blah...",
+  "repository": "https://github.com/Y-LyN-10/Guitar-Party",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mongodb",
+    "angular",
+    "express",
+    "nodejs",
+    "npm",
+    "gulp",
+    "security",
+    "passport"
+  ],
+  "author": "Community best of selection by Yulia Tenincheva",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "compression": "^1.6.0",
+    "connect-mongo": "^1.1.0",
+    "csurf": "^1.8.3",
+    "debug": "^2.2.0",
+    "errorhandler": "^1.4.2",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "express-sslify": "^1.0.1",
+    "express-validator": "^2.18.0",
+    "helmet": "^1.0.1",
+    "jade": "^1.11.0",
+    "mongodb": "^2.1.3",
+    "mongoose": "^4.3.4",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "semver": "^5.1.0",
+    "serve-favicon": "^2.3.0"
+  },
+  "devDependencies": {}
+}

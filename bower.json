@@ -1,0 +1,17 @@
+{
+  "name": "Skeleton",
+  "dependencies": {
+    "animate.css": "~3.3.0",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.3.0",
+    "moment": "~2.10.3"
+  },
+  "resolutions": {
+    "devicons": "~1.8.0",
+    "animate.css": "~3.3.0",
+    "bootstrap-social": "~4.9.1",
+    "card": "~1.0.2",
+    "font-awesome": "~4.3.0",
+    "moment": "~2.10.3"
+  }
+}

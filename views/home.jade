@@ -1,0 +1,52 @@
+extends ./layouts/layout
+
+block head
+  title #{application} &middot; Welcome!
+
+block styles
+  link(rel='stylesheet', href='/lib/animate.css/animate.css')
+
+block content
+  .jumbotron.white
+    .container
+      h1 Hello...
+      .row.hidden-xs
+
+//- Page-specific stuff
+block scripts
+  //- Async load odometer styles
+  script.
+    var cb = function() {
+      var l = document.createElement('link'); l.rel = 'stylesheet';
+      l.href = 'lib/odometer/themes/odometer-theme-minimal.css';
+      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+        webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) raf(cb);
+    else window.addEventListener('load', cb);
+
+  //- Tweak the styles a bit...
+  style.
+    .github-count {
+      margin-top:20px;
+      font-size: 20px;
+      text-align: center;
+    }
+    .odometer-label {
+      margin-right: 10px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .odometer {
+      padding: 13px 21px 11px;
+      margin: auto;
+      line-height: 1 !important;
+      border-radius: 6px;
+    }
+    .odometer-label a {
+      text-decoration: none;
+    }
+    .odometer-label a:hover {
+      color: #B10DC9;
+    }
