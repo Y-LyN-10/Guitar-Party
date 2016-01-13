@@ -6,11 +6,24 @@ var User = require('mongoose').model('User'),
     DEFAULT_PAGE = 1;
 
 module.exports = {
+    loginIndex: function(req, res) {
+        res.render('logIn', {
+            application: 'Guitar Party',
+            title: 'Login'
+        })
+    },
+    registerIndex: function(req, res) {
+        res.render('signUp', {
+            application: 'Guitar Party',
+            title: 'Sign Up'
+        })
+    },
     createUser: function (req, res, next) {
+        console.log('usersController.createUser <==');
         var newUserData;
         if(req.body.models){
             newUserData  = req.body.models[0]
-        }else {
+        } else {
             newUserData = req.body;
         }
 
@@ -36,6 +49,9 @@ module.exports = {
                 res.send(user);
             })
         });
+    },
+    logUser: function(req, res, next) {
+
     },
     updateUser: function (req, res, next) {
         if (req.user._id == req.body._id || req.user.roles.indexOf('admin') > -1) {

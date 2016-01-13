@@ -28,29 +28,19 @@ var expressValidator  = require('express-validator');
 
 // Database & ODM
 var MongoStore = require('connect-mongo')(session);
-var mongoose   = require('mongoose');
+var mongoose   = require('mongoose'),
+    song = require('./api/models/Song'),
+    repertoire = require('./api/models/Repertoire'),
+    user = require('./api/models/User');
 
 // Express app & config keys
 var app = express();
-var config = require('./config/');
-
+var config = require('./config/index.js');
+console.log(config);
 // Passport oAuth Middleware
 // Passport OAUTH Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-/*---------|
- * Routers |
- *---------*/
-
-/* TODO
- *
- * Examples:
-
-var api  = require('./api/routes/');
-var auth = require('./api/routes/auth');
-
-*/
 
 /*-----------------------------------|
  * Set MongoDB Connection & Sessings |
@@ -128,11 +118,27 @@ app.use(helmet.nosniff());           // Sets X-Content-Type-Options to nosniff
 app.use(helmet.xssFilter());         // sets the X-XSS-Protection header
 app.use(helmet.frameguard('deny'));  // Prevent iframe clickjacking
 
+/*---------|
+ * Routers |
+ *---------*/
+
+/* TODO
+ *
+ * Examples:
+
+ var api  = require('./api/routes/');
+
+ */
+
+var auth = require('./api/routes/auth');
+
 /*------------|
  * Api Routes |
  *-----------*/
 
 app.get('/', require('./api/controllers/home').index);
+app.use(auth);
+//app.get('/logout', require('./api/controllers/userController'));
 
 /*----------------|
  * Error Handlers |
@@ -145,7 +151,10 @@ app.use(function (req, res, next) {
 
   // Respond with html page
   if (req.accepts('html')) {
-    res.render('error/404', { url: req.url });
+    res.render('error/404', {
+      url: req.url,
+      application: 'Guitar Party'
+    });
     return;
   }
 
@@ -170,6 +179,7 @@ app.use(function (err, req, res, next) {
     if (req.accepts('html')) {
       res.render('error/403', {
         error: err,
+        application: 'Guitar Party',
         url: req.url
       });
       return;

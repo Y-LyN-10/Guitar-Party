@@ -51,7 +51,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, function (email, pass
       return done(null, user);
     }
     else {
-      return done(null, false);
+      return done(null, false, { message: 'Your account must be verified first!' });
     }
 
     //// Only authenticate if the user is verified

@@ -1,17 +1,36 @@
 {
-  "name": "Skeleton",
+  "name": "GuitarParty",
+  "version": "0.0.1",
+  "description": "MEAN Stack application",
+  "main": "server.js",
+  "authors": [
+    "Team 2"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
   "dependencies": {
+    "jquery": "~2.1.4",
+    "toastr": "~2.1.2",
+    "angular": "~1.4.8",
+    "angular-resource": "~1.4.8",
+    "angular-route": "~1.4.8",
     "animate.css": "~3.3.0",
     "bootstrap": "~3.3.5",
+    "bootstrap-social": "~4.9.1",
     "font-awesome": "~4.3.0",
-    "moment": "~2.10.3"
+    "moment": "~2.10.3",
+    "odometer": "~0.4.7",
+    "devicons": "~1.8.0",
+    "card": "~1.0.2"
   },
   "resolutions": {
-    "devicons": "~1.8.0",
-    "animate.css": "~3.3.0",
-    "bootstrap-social": "~4.9.1",
-    "card": "~1.0.2",
-    "font-awesome": "~4.3.0",
-    "moment": "~2.10.3"
+    "font-awesome": "~4.4"
   }
 }

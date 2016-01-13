@@ -1,9 +1,17 @@
 doctype html
 html(lang="en")
-  include ../partials/head
-  body
+  head
+    //- Behavioral Meta Data
+    meta(charset='utf-8')
+    meta(name='x-csrf-token', content=_csrf)
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    script(type="text/javascript" src="/lib/angular/angular.js")
+    include ../partials/head
+  body(ng-app="app" ng-cloak)
     include ../partials/navigation
     block content
     include ../partials/footer
-    block scripts
+
 
