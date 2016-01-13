@@ -9,7 +9,7 @@
 var express = require('express'),
     router  = express.Router(),
 
-    userController = require('../controllers/user');
+    userController = require('../controllers/userController');
 
 router
   .get('/login',   userController.getLogin)

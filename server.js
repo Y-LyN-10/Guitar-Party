@@ -117,7 +117,7 @@ app.use(expressValidator()); // easy form validation
 app.use(session(config.session));
 
 // Logging
-var logFile = fs.createWriteStream(`./logs/${new Date().getTime()}.log`, { flags: 'a' });
+var logFile = fs.createWriteStream('./logs/' + new Date().getTime().log, { flags: 'a' });
 app.use(logger('combined', { stream: logFile }));
 
 // Security Settings
