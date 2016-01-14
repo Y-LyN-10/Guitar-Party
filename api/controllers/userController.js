@@ -19,7 +19,6 @@ module.exports = {
         })
     },
     createUser: function (req, res, next) {
-        console.log('usersController.createUser <==');
         var newUserData;
         if(req.body.models){
             newUserData  = req.body.models[0]

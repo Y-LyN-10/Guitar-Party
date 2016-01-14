@@ -5,11 +5,12 @@
 
         vm.signup = function(user) {
             auth.signup(user).then(function() {
+                console.log('success from signUpController');
                 notifier.success('Registration successful!');
                 setInterval(function () {
                     window.location.href = "/";
                 }, 1000);
-            })
+            });
         }}
 
     angular.module('app.controllers')

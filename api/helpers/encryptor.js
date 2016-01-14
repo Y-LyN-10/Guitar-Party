@@ -1,10 +1,10 @@
-var encryptor = require('../helpers/encryptor');
+var utils = require('../../config/utils');
 
 module.exports = {
     generateSalt: function () {
-        return encryptor.randomKey(64);
+        return utils.randomKey(64);
     },
     generateHash: function (salt, password) {
-        return encryptor.encode(password) ^ salt;
+        return utils.encode(password) + salt;
     }
 };

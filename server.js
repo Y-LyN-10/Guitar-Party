@@ -36,9 +36,9 @@ var mongoose   = require('mongoose'),
 // Express app & config keys
 var app = express();
 var config = require('./config/index.js');
-console.log(config);
 // Passport oAuth Middleware
 // Passport OAUTH Middleware
+require('./config/passport')();
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -99,6 +99,7 @@ app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public', { maxAge: 604800000 })); // week
 
 app.use(compress());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator()); // easy form validation
 
@@ -112,7 +113,7 @@ app.use(logger('combined', { stream: logFile }));
 
 // Security Settings
 app.disable('x-powered-by');         // Don't advertise our server type
-app.use(csrf());                     // Prevent Cross-Site Request Forgery
+//app.use(csrf());                     // Prevent Cross-Site Request Forgery
 app.use(helmet.ienoopen());          // X-Download-Options for IE8+
 app.use(helmet.nosniff());           // Sets X-Content-Type-Options to nosniff
 app.use(helmet.xssFilter());         // sets the X-XSS-Protection header

@@ -9,7 +9,6 @@
                 var user = new UsersResource(user);
                 console.log(user);
                 user.$save().then(function() {
-                    console.log('success');
                     identity.currentUser = user;
                     deferred.resolve();
                 }, function(response) {

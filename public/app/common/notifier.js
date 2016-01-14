@@ -14,5 +14,4 @@
 
     angular.module('app.services')
         .factory('notifier', ['toastr', notifierService]);
-
 }());
