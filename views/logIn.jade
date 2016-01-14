@@ -7,21 +7,21 @@ block styles
     link(rel='stylesheet', href='lib/animate.css/animate.css')
 
 block content
-    .container(ng-controller="LoginController as vm")
+    .container
         .row
             .col-md-6.col-md-offset-3
-                form.form-horizontal(name='loginForm', ng-submit='loginForm.$valid')
+                form.form-horizontal(name='loginForm', ng-submit='loginForm.$valid' method="post" action="/login")
                     fieldset
                         legend SignIn
-                        .text-center.error(ng-show='loginForm.inputUsername.$error.minlength || loginForm.inputUsername.$error.minlength') Username must be between 6 and 50 symbols
+                        .text-center.error(ng-show='loginForm.username.$error.minlength || loginForm.inputUsername.$error.minlength') Username must be between 6 and 50 symbols
                         .form-group
                             label.col-lg-2.control-label(for='inputUsername') User Name
                             .col-lg-10
-                                input#inputUsername.form-control(type='text', name='inputUsername', ng-model='user.username', ng-minlength='3', ng-maxlength='30' required='required', placeholder='User Name')
-                        .text-center.error(ng-show='loginForm.userPassword.$error.minlength') Pasword must be at least 6 symbols long !
+                                input#inputUsername.form-control(type='text', name='username', ng-minlength='3', ng-maxlength='30' required='required', placeholder='User Name')
+                        .text-center.error(ng-show='loginForm.password.$error.minlength') Pasword must be at least 6 symbols long !
                         .form-group
                             label.col-lg-2.control-label(for='inputPassword') Password
                             .col-lg-10
-                                input#inputPassword.form-control(type='password', name='userPassword', ng-model='user.password', ng-minlength='6', required='required', placeholder='Password')
-                .col-lg-10.col-lg-offset-2.pull-right
-                button.btn.btn-default(ng-click="vm.login(user)" ng-disabled='loginForm.$invalid') Sign In
+                                input#inputPassword.form-control(type='password', name='password', ng-minlength='6', required='required', placeholder='Password')
+                    .col-lg-10.col-lg-offset-2.pull-right
+                    button.btn.btn-default(ng-disabled='loginForm.$invalid' type='submit') Sign In

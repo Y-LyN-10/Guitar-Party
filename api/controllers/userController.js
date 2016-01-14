@@ -1,4 +1,5 @@
 var encryptor = require('../helpers/encryptor');
+var passport = require('passport');
 var User = require('mongoose').model('User'),
     Repertoire = require('mongoose').model('Repertoire'),
     Song = require('mongoose').model('Song'),
@@ -17,6 +18,13 @@ module.exports = {
             application: 'Guitar Party',
             title: 'Sign Up'
         })
+    },
+    userDetailsIndex: function(req, res) {
+        res.render('userDetails', {
+            application: 'Guitar Party',
+            title: 'User Details',
+            user: req.user
+        });
     },
     createUser: function (req, res, next) {
         var newUserData;
@@ -45,11 +53,48 @@ module.exports = {
                     return res.send({reason: err.toString()});
                 }
 
-                res.send(user);
+                res.redirect('/login');
             })
         });
     },
     logUser: function(req, res, next) {
+        var auth = passport.authenticate('local', function(err, user) {
+            if (err) return next(err);
+            if (!user) {
+                res.send({success: false})
+            }
+            req.logIn(user, function(err) {
+                if (err) return next(err);
+                res.redirect('/');
+                //res.send({success: true, user: user});
+            })
+        })(req, res, next);
+    },
+    logOutUser: function(req, res, next) {
+        req.logout();
+        res.redirect('/');
+    },
+    isAuthenticated: function(req, res, next) {
+        if (!req.isAuthenticated()) {
+            var error = new Error('Unauthorized');
+            error.status = 403;
+            next(error);
+        }
+        else {
+            next();
+        }
+    },
+    isInRole: function(role) {
+        return function(req, res, next) {
+            if (req.isAuthenticated() && req.user.roles.indexOf(role) > -1) {
+                next();
+            }
+            else {
+                var error = new Error('Unauthorized');
+                error.status = 403;
+                next(error);
+            }
+        }
     },
     updateUser: function (req, res, next) {
         if (req.user._id == req.body._id || req.user.roles.indexOf('admin') > -1) {
@@ -67,10 +112,11 @@ module.exports = {
             res.send({reason: 'You do not have permissions!'})
         }
     },
-    getAllUsers: function (req, res) {
+    getAllUsers: function (req, res, next) {
         User.find({}).exec(function (err, collection) {
             if (err) {
                 console.log('Get all users failed: ' + err);
+                next(err);
             }
 
             res.send(collection);
@@ -129,8 +175,7 @@ module.exports = {
                     return;
                 }
 
-                res.status(202)
-                    .send(user);
+                res.status(202).send(user);
                 res.end();
             });
         }

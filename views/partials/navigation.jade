@@ -12,26 +12,26 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
     .collapse.navbar-collapse
       if user
         ul.nav.navbar-nav
-          li.dropdown(class=url=='/apiopen'?'active':undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              i.fa.fa-fw.fa-laptop
-              | &nbsp;APIs (open)&nbsp;
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown')
+              i.fa.fa-fw.fa-music
+              | &nbsp;Songs&nbsp;
               b.caret
             ul.dropdown-menu
               li
-                a(href='/api/lastfm')
-                  i.fa.fa-fw.fa-laptop
-                  | &nbsp;Last.fm
-          li.dropdown(class=url=='/apilocked'?'active':undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              i.fa.fa-fw.fa-lock
-              | &nbsp;APIs (auth req'd) &nbsp;
+                a(href='/api/songs/add')
+                  i.fa.fa-fw.fa-plus
+                  | &nbsp;Add Song
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown')
+              i.fa.fa-fw.fa-street-view
+              | &nbsp;Repertoire &nbsp;
               b.caret
             ul.dropdown-menu
               li
-                a(href='/api/facebook')
-                  i.fa.fa-fw.fa-lock
-                  | &nbsp;Facebook
+                a(href='/api/repertoire/add')
+                  i.fa.fa-fw.fa-plus
+                  | &nbsp;Create New
         //- Right side
         ul.nav.navbar-nav.navbar-right
 
@@ -75,9 +75,10 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
                   | &nbsp;Contact Us
               li.divider
               li
-                a(href='/logout')
-                  i.fa.fa-fw.fa-sign-out
-                  | &nbsp;Logout
+                form.form-horizontal(method="post" action="/logout")
+                  button.btn.btn-default(type='submit')
+                    i.fa.fa-fw.fa-sign-out
+                    | &nbsp;Logout
 
       else
         //- No user/not logged in
