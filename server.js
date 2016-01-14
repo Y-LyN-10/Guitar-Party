@@ -36,11 +36,6 @@ var mongoose   = require('mongoose'),
 // Express app & config keys
 var app = express();
 var config = require('./config/index.js');
-// Passport oAuth Middleware
-// Passport OAUTH Middleware
-require('./config/passport')();
-app.use(passport.initialize());
-app.use(passport.session());
 
 /*-----------------------------------|
  * Set MongoDB Connection & Sessings |
@@ -118,6 +113,12 @@ app.use(helmet.ienoopen());          // X-Download-Options for IE8+
 app.use(helmet.nosniff());           // Sets X-Content-Type-Options to nosniff
 app.use(helmet.xssFilter());         // sets the X-XSS-Protection header
 app.use(helmet.frameguard('deny'));  // Prevent iframe clickjacking
+
+// Passport oAuth Middleware
+// Passport OAUTH Middleware
+require('./config/passport')();
+app.use(passport.initialize());
+app.use(passport.session());
 
 /*---------|
  * Routers |

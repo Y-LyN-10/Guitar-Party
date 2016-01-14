@@ -31,7 +31,7 @@ module.exports = function() {
   });
 
   passport.deserializeUser(function (id, done) {
-    User.findOne({_id: id}).exec(function (err, user) {
+    User.findOne(id).exec(function (err, user) {
       if (err) {
         console.log('Error loading user: ' + err);
         return;
@@ -69,6 +69,31 @@ module.exports = function() {
       }
     })
   }));
+
+  passport.isAuthenticated = function (req, res, next) {
+    // Is the user authenticated?
+    if (req.isAuthenticated()) {
+      // Does the user have enhanced security enabled?
+      if (req.user.enhancedSecurity.enabled) {
+        // If we already have validated the second factor it's
+        // a noop, otherwise redirect to capture the OTP.
+        if (req.session.passport.secondFactor === 'validated') {
+          return next();
+        } else {
+          // Verify their OTP code
+          res.redirect('/verify-setup');
+        }
+      } else {
+        // If enhanced security is disabled just continue.
+        return next();
+      }
+    } else {
+      req.session.attemptedURL = req.url;  // Save URL so we can redirect to it after authentication
+      res.set('X-Auth-Required', 'true');
+      req.flash('error', { msg: 'You must be logged in to reach that page.' });
+      res.redirect('/login');
+    }
+  };
 };
 
   //// Only authenticate if the user is verified

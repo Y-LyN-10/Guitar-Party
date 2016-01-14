@@ -1,7 +1,9 @@
 (function () {
     function LoginController($scope, notifier, identity, auth) {
         $scope.identity = identity;
-        $scope.login = function (user) {
+        var vm = this;
+
+        vm.login = function(user) {
             auth.login(user).then(function (success) {
                 if (success) {
                     notifier.success('Successful login!');
@@ -14,6 +16,8 @@
                 }
             });
         };
+
+        $scope.login = vm.login;
 
         $scope.logout = function () {
             auth.logout().then(function () {

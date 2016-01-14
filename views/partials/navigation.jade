@@ -36,7 +36,7 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
         ul.nav.navbar-nav.navbar-right
 
           //- Visible to Admin users only!
-          if user.type == 'admin'
+          if user.roles.indexOf('admin') > -1
             li.dropdown(class=url=='/administration'?'active':undefined)
               a.dropdown-toggle(href='#', data-toggle='dropdown')
                 i.fa.fa-fw.fa-cogs
@@ -58,11 +58,11 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
           //- User account
           li.dropdown(class=url=='/account'?'active':undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
-              if user.profile.picture
-                img.profile-image(src='#{user.profile.picture}')
+              if user.pictureUrl
+                img.profile-image(src='#{user.pictureUrl}')
               else
                 img.profile-image(src='#{user.gravatar(60)}')
-              | #{user.profile.name || user.email || user.id}&nbsp;
+              | #{user.username || user.email || user._id}&nbsp;
               b.caret
             ul.dropdown-menu
               li

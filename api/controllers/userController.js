@@ -50,7 +50,6 @@ module.exports = {
         });
     },
     logUser: function(req, res, next) {
-
     },
     updateUser: function (req, res, next) {
         if (req.user._id == req.body._id || req.user.roles.indexOf('admin') > -1) {
